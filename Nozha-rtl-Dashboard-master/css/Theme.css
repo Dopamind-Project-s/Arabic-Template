@@ -9,9 +9,9 @@
   --text-color: #1f2a37;
   --muted-color: #6b7a8e;
   --border-color: #c9d3df;
-  --sidebar-start: #00050e;
-  --sidebar-end: #041329;
-  --sidebar-cyan: #00b7d6;
+  --sidebar-start: #f3f8ff;
+  --sidebar-end: #dcecff;
+  --sidebar-cyan: #8fb6de;
 }
 
 [data-theme="dark"] {
@@ -25,9 +25,9 @@
   --text-color: #edf3ff;
   --muted-color: #9cb0c8;
   --border-color: #2e3d56;
-  --sidebar-start: #01040a;
-  --sidebar-end: #07152c;
-  --sidebar-cyan: #35d1eb;
+  --sidebar-start: #24324a;
+  --sidebar-end: #1a2538;
+  --sidebar-cyan: #4d79aa;
 }
 
 html, body {
