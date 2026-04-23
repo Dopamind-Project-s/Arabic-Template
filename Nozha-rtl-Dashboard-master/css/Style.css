@@ -1,138 +1,84 @@
 .layout-shell {
   display: flex;
   min-height: 100vh;
+  background: #dce2eb;
 }
 
 .sidebar-original {
-  width: 260px;
+  width: 235px;
   flex-shrink: 0;
-  background: #fff;
-  border-inline-end: 1px solid var(--border-color);
-  padding: 1rem;
+  background: linear-gradient(180deg, #07010f 0%, #0b1527 100%);
+  color: #c9d1dc;
+  padding: 1rem 0.5rem;
   position: sticky;
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.08);
   transition: transform .25s ease;
 }
 
 .sidebar-brand {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  padding: .5rem;
-  margin-bottom: 1rem;
+  padding: 0 .5rem;
 }
+
+.brand-logo { height: 50px; width: auto; }
 
 .side-comment {
-  margin: .75rem .5rem .4rem;
-  color: var(--muted-color);
-  font-size: .85rem;
+  margin: 0.9rem .6rem .4rem;
+  color: #9ea7b4;
+  font-size: .9rem;
 }
 
-.side-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+.side-list { list-style: none; margin: 0; padding: 0; }
 
 .side-item a {
   display: block;
+  color: #d2dae4;
   text-decoration: none;
-  color: var(--text-color);
-  padding: .65rem .8rem;
-  border-radius: .65rem;
-  margin-bottom: .3rem;
+  padding: .62rem .8rem;
+  border-radius: .7rem;
+  margin-bottom: .2rem;
 }
 
 .side-item.selected a,
-.side-item a:hover {
-  background: rgba(14, 90, 122, .12);
-  color: var(--brand-primary);
-}
+.side-item a:hover { background: rgba(255,255,255,.85); color: #1a2333; }
 
-.content-shell {
-  flex: 1;
-  min-width: 0;
-}
+.content-shell { flex: 1; min-width: 0; }
 
 .topbar-original {
-  height: 68px;
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  padding: .75rem 1rem;
-  background: var(--surface-bg);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  margin: 1rem;
+  border-radius: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 3px 8px rgba(0,0,0,.08);
+  padding: .4rem 1rem;
 }
 
-.content-main {
-  padding: 1rem;
+.topbar-toggle {
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #cfd6de;
 }
 
-.brand-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
+.screen-user-profile { width: 38px; height: 38px; }
+
+.content-main { padding: 0 1rem 1rem; }
 
 .card {
-  border: 1px solid var(--border-color);
+  border: 1px solid #cfd6de;
   border-radius: 1rem;
-  background: var(--surface-bg);
-  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+  background: #f2f4f7;
 }
 
-.stat-card {
-  border-inline-start: 4px solid var(--brand-primary);
-}
+.stat-card { border-inline-end: 4px solid #0f6a90; }
 
-[data-theme="dark"] .card,
-[data-theme="dark"] .sidebar-original,
-[data-theme="dark"] .topbar-original {
-  border-color: var(--border-color);
-  background: var(--surface-bg);
-  color: var(--text-color);
-}
-
-.fc .fc-button-primary {
-  background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
-}
-
-.fc .fc-button-primary:not(:disabled).fc-button-active,
-.fc .fc-button-primary:not(:disabled):active,
-.fc .fc-button-primary:hover {
-  background-color: var(--brand-secondary);
-  border-color: var(--brand-secondary);
-}
-
-.fc-theme-standard td,
-.fc-theme-standard th,
-.fc-theme-standard .fc-scrollgrid {
-  border-color: var(--border-color);
-}
-
-#calendar {
-  min-height: 400px;
-}
+.fc .fc-button-primary { background:#0f6487; border-color:#0f6487; }
+.fc .fc-button-primary:hover,
+.fc .fc-button-primary:not(:disabled).fc-button-active { background:#0a8f61; border-color:#0a8f61; }
 
 @media (max-width: 991.98px) {
-  .sidebar-original {
-    position: fixed;
-    inset-inline-start: 0;
-    z-index: 1030;
-    transform: translateX(-100%);
-  }
-
-  [dir="rtl"] .sidebar-original {
-    transform: translateX(100%);
-  }
-
-  .sidebar-original.open {
-    transform: translateX(0) !important;
-  }
+  .sidebar-original { position: fixed; inset-inline-start: 0; z-index: 1030; transform: translateX(-100%); }
+  [dir="rtl"] .sidebar-original { transform: translateX(100%); }
+  .sidebar-original.open { transform: translateX(0) !important; }
 }

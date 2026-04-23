@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <link id="bootstrapCss" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" href="./css/Theme.css">
   <link rel="stylesheet" href="./css/Style.css">
@@ -15,43 +19,53 @@
 <body>
   <div class="layout-shell">
     <aside id="appSidebar" class="sidebar-original">
-      <div class="sidebar-brand">
-        <img class="brand-logo" src="./svg/logo.svg" alt="App logo">
-        <strong>لوحة المشاريع</strong>
+      <div class="sidebar-brand border-bottom pb-3 mb-3">
+        <img class="brand-logo" src="./svg/logo-grey.svg" alt="Nozha logo">
       </div>
       <p class="side-comment">القائمة السريعة</p>
-      <ul class="side-list">
-        <li class="side-item "><a href="./index.html">Dashboard</a></li>
-        <li class="side-item "><a href="./widget.html">Widget</a></li>
-        <li class="side-item "><a href="./modal.html">Modal</a></li>
-        <li class="side-item "><a href="./toast.html">Toast</a></li>
-        <li class="side-item "><a href="./Chart.html">Chart</a></li>
-      </ul>
+      <ul class="side-list"><li class="side-item "><a href="./index.html"><i class="fas fa-angle-left me-2"></i>الرئيسية</a></li>
+<li class="side-item "><a href="./Chart.html"><i class="fas fa-angle-left me-2"></i>التقارير</a></li>
+<li class="side-item "><a href="./sidebar.html"><i class="fas fa-angle-left me-2"></i>الإعدادات</a></li>
+<li class="side-item "><a href="./widget.html"><i class="fas fa-angle-left me-2"></i>Widget</a></li>
+<li class="side-item "><a href="./modal.html"><i class="fas fa-angle-left me-2"></i>Modal</a></li></ul>
       <p class="side-comment">اللغة</p>
       <select class="form-select mb-2" id="mobileLocale"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select>
-      <button id="mobileThemeToggle" class="btn btn-outline-secondary w-100">🌙 Dark</button>
+      <button id="mobileThemeToggle" class="btn btn-outline-light w-100">🌙 داكن</button>
     </aside>
 
     <div class="content-shell">
-      <header class="topbar-original">
-        <button id="sidebarToggle" class="btn btn-light" type="button">☰</button>
-        <div class="d-flex align-items-center gap-2 ms-auto">
-          <select class="form-select" id="localeSelect" aria-label="Language"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select>
-          <button id="themeToggle" class="btn btn-outline-secondary">🌙 Dark</button>
-        </div>
+      <header>
+        <nav class="navbar navbar-light bg-faded animate__animated animate__fadeInDown topbar-original">
+          <button id="sidebarToggle" class="btn topbar-toggle" type="button"><i class="fas fa-bars"></i></button>
+          <ul class="nav ms-auto align-items-center gap-2">
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-envelope"></i><span class="badge bg-danger rounded-pill">5</span></button>
+              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#">4 new messages</a></li><li><a class="dropdown-item" href="#">See all</a></li></ul>
+            </li>
+            <li class="nav-item dropdown">
+              <button class="btn dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-bell"></i><span class="badge bg-warning rounded-pill text-dark">5</span></button>
+              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#">8 notifications</a></li><li><a class="dropdown-item" href="#">See all</a></li></ul>
+            </li>
+            <li class="nav-item"><img src="./img/user-profile.jpg" alt="user" class="rounded-circle screen-user-profile"></li>
+            <li class="nav-item dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">MAJID</button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><button id="themeToggle" class="dropdown-item" type="button">🌙 Dark</button></li>
+              </ul>
+            </li>
+            <li class="nav-item"><select class="form-select" id="localeSelect"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select></li>
+          </ul>
+        </nav>
       </header>
-
-      <main class="content-main">
-        <div class="card p-4">
-          <h1 class="h4 mb-2">Icon</h1>
-          <p class="text-muted mb-3">تم تحويل هذه الصفحة إلى الثيم الجديد مع نفس الناف والسايد بار.</p>
-          <a href="./index.html" class="btn btn-theme">العودة للوحة الرئيسية</a>
-        </div>
-      </main>
+      <main class="content-main"><div class="card p-4"><h1 class="h4 mb-2">Icon</h1><p class="text-muted">تم تحويل الصفحة مع الحفاظ على الناف والسايد بار بنفس شكل الثيم الأصلي.</p><a href="./index.html" class="btn btn-theme">العودة للرئيسية</a></div></main>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/locales-all.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="./js/app.js"></script>
-</body>
-</html>
+</body></html>

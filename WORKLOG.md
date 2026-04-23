@@ -87,3 +87,10 @@
 37. Kept the same navbar + sidebar structure/style across all converted pages.
 38. Cleaned page bodies to remove old mixed markup and replaced with consistent card-based placeholders for phased component rebuild.
 39. Updated dashboard navigation links to actual migrated pages for easier traversal.
+
+## 2026-04-23 (restore classic Nozha topbar/sidebar look)
+
+40. Rebuilt all pages to include classic topbar class: `navbar navbar-light bg-faded animate__animated animate__fadeInDown`.
+41. Restored old-style notifications + dropdowns in topbar (envelope, bell, user profile menu).
+42. Adjusted sidebar visual theme to dark Nozha-like gradient and original menu behavior style.
+43. Kept unified RTL/LTR + theme + locale runtime behavior on top of restored visual shell.
