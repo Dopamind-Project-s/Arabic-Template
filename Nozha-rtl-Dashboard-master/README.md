@@ -1,31 +1,34 @@
-# Nozha-Dashboard:
-![picture](img/banner.jpg)
+# ZAHA Flow Theme (Arabic RTL Bootstrap Dashboard)
 
-Nozha Admin Panel is a free to use Bootstrap admin template. This template uses the default Bootstrap 4 styles for creating admin panels or back-end dashboards.
-its support Rtl language like persian, arabic and etc .
-You can use Dark mode on this theme.
+قالب إداري عربي حديث مبني على **Bootstrap 5.3** مع دعم احترافي للاتجاهين **RTL / LTR** ووضعي **Light / Dark**.
 
+## المميزات الأساسية
+- Bootstrap-first layout بدون تعارض مع أطر إضافية.
+- سايد بار واضح مع صفحات فعلية لكل ميزة رئيسية.
+- دعم i18n (العربية / الإنجليزية) مع تحميل ملفات ترجمة JSON.
+- Dark/Light mode محفوظ في LocalStorage.
+- FullCalendar + Flatpickr للجدولة والتواريخ.
+- Toastr + SweetAlert للإشعارات.
 
- 
-# Demo-Picture:
-[Demo page](https://majidalinejad.github.io/Nozha-rtl-Dashboard/)
-admin panel with doc
-***
-![picture](img/screen.jpg)
-***
+## هيكل الصفحات المعتمد
+- `index.html` : لوحة التحكم + KPI + تقويم + وقت/تاريخ.
+- `card.html` : كروت الألوان الجديدة (Gradients).
+- `Chart.html` : مؤشرات وتحليلات.
+- `Input.html` : نماذج الإدخال.
+- `modal.html` : إشعارات (نجاح/تحذير/معلومة).
+- `sidebar.html` : الإعدادات العامة.
 
-# Farsi Demo-Picture:
-[Demo page](https://majidalinejad.github.io/Nozha-rtl-Dashboard/fa.html)
-پنل ادمین فارسی به همراه داکیومنت
-***
-![picture](img/screen-fa.jpg)
+## الملفات المهمة
+- `css/Theme.css` : ألوان ومتغيرات الثيم (فاتح/داكن).
+- `css/Style.css` : التخطيط والمظهر العام والسايدبار.
+- `js/app.js` : إدارة اللغة، الثيم، الاتجاه، والميزات الديناميكية.
+- `locales/ar/common.json` و `locales/en/common.json` : النصوص والترجمة.
 
-# Scripts included:
-- Bootstrap
-- Font Awesome
-- Charts.js
-- jQuery
- 
-# License information:
-Nozha is licensed under OpenSource. Which means that you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
-Project is developed and maintained by Negarafar and Majid Alinejad.
+## تشغيل محلي سريع
+يمكن تشغيل المشروع بأي Static Server (مثل VS Code Live Server) وفتح:
+`Nozha-rtl-Dashboard-master/index.html`
+
+## ملاحظات الجودة
+- تم حذف الصفحات والملفات والصور غير المستخدمة من الثيم.
+- تم تنظيف النصوص وتوحيد التسميات داخل الواجهة.
+- تم الإبقاء على Bootstrap كمحور رئيسي لكل الواجهات.
