@@ -54,7 +54,9 @@
     infoAlert: document.getElementById('infoAlert'),
     currentTime: document.getElementById('currentTime'),
     calendarFallback: document.getElementById('calendarFallback'),
-    dateFallback: document.getElementById('dateFallback')
+    dateFallback: document.getElementById('dateFallback'),
+    sidebarToggle: document.getElementById('sidebarToggle'),
+    appSidebar: document.getElementById('appSidebar')
   };
 
   let calendar;
@@ -181,6 +183,12 @@
     setTheme(state.theme);
   };
 
+
+  const toggleSidebar = () => {
+    if (!el.appSidebar) return;
+    el.appSidebar.classList.toggle('open');
+  };
+
   const bindEvents = () => {
     el.localeSelect.addEventListener('change', (e) => {
       state.locale = e.target.value;
@@ -192,6 +200,7 @@
       loadLocale(state.locale);
     });
 
+    if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
     el.themeToggle.addEventListener('click', toggleTheme);
     el.mobileThemeToggle.addEventListener('click', toggleTheme);
 

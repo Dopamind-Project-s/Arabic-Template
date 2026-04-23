@@ -1,11 +1,81 @@
-.topbar {
+.layout-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-original {
+  width: 260px;
+  flex-shrink: 0;
+  background: #fff;
+  border-inline-end: 1px solid var(--border-color);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform .25s ease;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .5rem;
+  margin-bottom: 1rem;
+}
+
+.side-comment {
+  margin: .75rem .5rem .4rem;
+  color: var(--muted-color);
+  font-size: .85rem;
+}
+
+.side-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-item a {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  padding: .65rem .8rem;
+  border-radius: .65rem;
+  margin-bottom: .3rem;
+}
+
+.side-item.selected a,
+.side-item a:hover {
+  background: rgba(14, 90, 122, .12);
+  color: var(--brand-primary);
+}
+
+.content-shell {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar-original {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem;
   background: var(--surface-bg);
   border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.content-main {
+  padding: 1rem;
 }
 
 .brand-logo {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -21,16 +91,9 @@
 }
 
 [data-theme="dark"] .card,
-[data-theme="dark"] .topbar,
-[data-theme="dark"] .offcanvas,
-[data-theme="dark"] .modal-content {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+[data-theme="dark"] .sidebar-original,
+[data-theme="dark"] .topbar-original {
   border-color: var(--border-color);
-  background: var(--surface-bg);
-  color: var(--text-color);
-}
-
-.offcanvas {
   background: var(--surface-bg);
   color: var(--text-color);
 }
@@ -54,17 +117,22 @@
 }
 
 #calendar {
-  min-height: 420px;
-}
-
-.control-group {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  min-height: 400px;
 }
 
 @media (max-width: 991.98px) {
-  #calendar {
-    min-height: 360px;
+  .sidebar-original {
+    position: fixed;
+    inset-inline-start: 0;
+    z-index: 1030;
+    transform: translateX(-100%);
+  }
+
+  [dir="rtl"] .sidebar-original {
+    transform: translateX(100%);
+  }
+
+  .sidebar-original.open {
+    transform: translateX(0) !important;
   }
 }

@@ -73,3 +73,10 @@
 29. Hardened `js/app.js` initialization logic with safe checks and try/catch around FullCalendar/Flatpickr startup.
 30. Added translation keys for fallback alerts in both locale files (AR/EN).
 31. Updated `PROGRESS.md` to reflect increased completion after hardening work.
+
+## 2026-04-23 (original-theme visual alignment)
+
+32. Reworked `index.html` layout to use a sidebar + topbar shell that visually matches the original theme structure.
+33. Updated `Style.css` with original-like side menu item styling (`side-comment`, selected state, compact nav look).
+34. Added responsive sidebar toggle behavior in `app.js` via `#sidebarToggle` + `.open` class.
+35. Kept new RTL/LTR, i18n, theme, calendar, and notification behavior while preserving original look direction.
