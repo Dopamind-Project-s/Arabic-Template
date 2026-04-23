@@ -34,7 +34,7 @@
 <li class="side-item "><a href="./zaha-identity.html"><i class="fas fa-gem"></i><span data-i18n="menu_identity">هوية زها</span></a></li>
 <li class="side-item selected"><a href="./feature-readme.html"><i class="fas fa-book-open"></i><span data-i18n="menu_readme_page">README بسيط</span></a></li></ul>
       <p class="side-comment">اللغة</p>
-      <select class="form-select mb-2" id="mobileLocale"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select>
+      <button id="mobileLocaleToggle" class="btn btn-outline-info w-100 mb-2">🌐 English (LTR)</button>
       <button id="mobileThemeToggle" class="btn btn-outline-light w-100">🌙 داكن</button>
     </aside>
     <div class="content-shell">
@@ -50,16 +50,17 @@
               <button class="btn icon-dd" data-bs-toggle="dropdown"><i class="far fa-bell"></i><span class="badge bg-warning text-dark rounded-pill">5</span><i class="fas fa-caret-down tiny-caret"></i></button>
               <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#">8 إشعارات</a></li><li><a class="dropdown-item" href="#">عرض الكل</a></li></ul>
             </li>
-            <li class="nav-item"><img src="https://i.pravatar.cc/40?img=12" class="top-avatar" alt="profile"></li>
+            <li class="nav-item"><span class="top-avatar top-avatar-icon"><i class="fas fa-user-astronaut"></i></span></li>
             <li class="nav-item dropdown">
               <button class="btn btn-profile dropdown-toggle" data-bs-toggle="dropdown">MAJID</button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="./sidebar.html">Settings</a></li>
-                <li><a class="dropdown-item" href="./Login.html">Login</a></li>
+                <li><a class="dropdown-item" href="./sidebar.html"><i class="fas fa-gear me-2"></i>Settings</a></li>
+                <li><a class="dropdown-item" href="./Login.html"><i class="fas fa-right-to-bracket me-2"></i>Login</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-right-from-bracket me-2"></i>Logout</a></li>
                 <li><button id="themeToggle" class="dropdown-item" type="button">🌙 Dark</button></li>
               </ul>
             </li>
-            <li class="nav-item"><select class="form-select form-select-sm" id="localeSelect"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select></li>
+            <li class="nav-item"><button class="btn btn-locale-toggle" id="localeToggle" type="button">🌐 English (LTR)</button></li>
           </ul>
         </nav>
       </header>

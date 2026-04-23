@@ -30,7 +30,6 @@
   };
 
   const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
   const state = {
     locale: localStorage.getItem('app_locale') || 'ar',
     theme: localStorage.getItem('app_theme') || preferredTheme,
@@ -39,8 +38,8 @@
 
   const el = {
     bootstrapCss: document.getElementById('bootstrapCss'),
-    localeSelect: document.getElementById('localeSelect'),
-    mobileLocale: document.getElementById('mobileLocale'),
+    localeToggle: document.getElementById('localeToggle'),
+    mobileLocaleToggle: document.getElementById('mobileLocaleToggle'),
     themeToggle: document.getElementById('themeToggle'),
     mobileThemeToggle: document.getElementById('mobileThemeToggle'),
     successToast: document.getElementById('successToast'),
@@ -59,15 +58,19 @@
     const isArabic = locale === 'ar';
     document.documentElement.lang = locale;
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
-    if (el.bootstrapCss) {
-      el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
-    }
+    if (el.bootstrapCss) el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
   };
 
   const syncThemeButtons = (theme) => {
     const label = theme === 'dark' ? (state.dictionary.theme_light || '☀️ Light') : (state.dictionary.theme_dark || '🌙 Dark');
     if (el.themeToggle) el.themeToggle.textContent = label;
     if (el.mobileThemeToggle) el.mobileThemeToggle.textContent = label;
+  };
+
+  const syncLocaleButtons = (locale) => {
+    const label = locale === 'ar' ? '🌐 English (LTR)' : '🌐 العربية (RTL)';
+    if (el.localeToggle) el.localeToggle.textContent = label;
+    if (el.mobileLocaleToggle) el.mobileLocaleToggle.textContent = label;
   };
 
   const setTheme = (theme) => {
@@ -89,7 +92,6 @@
 
   const loadLocale = async (locale) => {
     let dict = fallbackDictionaries[locale] || fallbackDictionaries.ar;
-
     try {
       const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
       if (response.ok) dict = await response.json();
@@ -99,6 +101,7 @@
 
     applyTranslations(dict);
     setDirection(locale);
+    syncLocaleButtons(locale);
 
     if (calendar) {
       calendar.setOption('locale', locale === 'ar' ? 'ar' : 'en');
@@ -107,14 +110,11 @@
     }
 
     localStorage.setItem('app_locale', locale);
-    if (el.localeSelect) el.localeSelect.value = locale;
-    if (el.mobileLocale) el.mobileLocale.value = locale;
   };
 
   const initCalendar = () => {
     const calendarEl = document.getElementById('calendar');
     if (!window.FullCalendar || !calendarEl) return;
-
     try {
       calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -128,19 +128,14 @@
       });
       calendar.render();
     } catch (error) {
-      console.warn('Calendar init failed:', error);
       if (el.calendarFallback) el.calendarFallback.classList.remove('d-none');
     }
   };
 
   const initDatePicker = () => {
     if (!window.flatpickr || !document.getElementById('meetingDate')) return;
-    try {
-      flatpickr('#meetingDate', { enableTime: true, dateFormat: 'Y-m-d H:i', time_24hr: true });
-    } catch (error) {
-      console.warn('Date picker init failed:', error);
-      if (el.dateFallback) el.dateFallback.classList.remove('d-none');
-    }
+    try { flatpickr('#meetingDate', { enableTime: true, dateFormat: 'Y-m-d H:i', time_24hr: true }); }
+    catch (error) { if (el.dateFallback) el.dateFallback.classList.remove('d-none'); }
   };
 
   const initClock = () => {
@@ -155,6 +150,11 @@
     setTheme(state.theme);
   };
 
+  const toggleLocale = () => {
+    state.locale = state.locale === 'ar' ? 'en' : 'ar';
+    loadLocale(state.locale);
+  };
+
   const toggleSidebar = () => {
     if (!el.appSidebar) return;
     if (window.innerWidth <= 991) el.appSidebar.classList.toggle('open');
@@ -162,24 +162,18 @@
   };
 
   const bindEvents = () => {
-    if (el.localeSelect) el.localeSelect.addEventListener('change', (e) => loadLocale(e.target.value));
-    if (el.mobileLocale) el.mobileLocale.addEventListener('change', (e) => loadLocale(e.target.value));
+    if (el.localeToggle) el.localeToggle.addEventListener('click', toggleLocale);
+    if (el.mobileLocaleToggle) el.mobileLocaleToggle.addEventListener('click', toggleLocale);
     if (el.themeToggle) el.themeToggle.addEventListener('click', toggleTheme);
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
 
     if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
     if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
-    if (el.infoAlert) {
-      el.infoAlert.addEventListener('click', () => {
-        Swal.fire({ icon: 'info', title: state.dictionary.info_title, text: state.dictionary.info_text });
-      });
-    }
+    if (el.infoAlert) el.infoAlert.addEventListener('click', () => Swal.fire({ icon: 'info', title: state.dictionary.info_title, text: state.dictionary.info_text }));
   };
 
   const init = async () => {
-    if (el.localeSelect) el.localeSelect.value = state.locale;
-    if (el.mobileLocale) el.mobileLocale.value = state.locale;
     setTheme(state.theme);
     initCalendar();
     initDatePicker();

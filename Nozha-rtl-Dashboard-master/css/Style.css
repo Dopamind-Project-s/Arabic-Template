@@ -156,3 +156,26 @@ body.sidebar-collapsed .side-item span { display: none; }
 .auth-card { background: var(--surface-bg); border-radius: 1.2rem; overflow: hidden; }
 .auth-cover { background: linear-gradient(160deg, #00a9c4, #4957d6); color: #fff; padding: 2rem; align-items: flex-end; }
 .auth-logo { width: 56px; height: 56px; object-fit: contain; }
+
+.top-avatar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00a9c4, #4957d6);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.btn-locale-toggle {
+  background: #eef4fa;
+  border: 1px solid #c5d4e6;
+  color: #2b3c52;
+  border-radius: .55rem;
+  padding: .35rem .65rem;
+  font-size: .85rem;
+}
+
+.btn-locale-toggle:hover {
+  background: #dfeaf8;
+  color: #1f2a37;
+}
