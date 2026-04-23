@@ -1,32 +1,26 @@
 (function () {
   const fallbackDictionaries = {
     ar: {
-      app_title: 'لوحة المشاريع',
-      welcome: 'مرحبًا بك في قالب المشاريع',
-      subtitle: 'قالب عربي افتراضي يدعم RTL/LTR، الوضع الليلي، والترجمة.',
-      notify_saved: 'تم حفظ الإعدادات بنجاح',
-      notify_warning_msg: 'يوجد مهام متأخرة تحتاج متابعة.',
-      notify_title: 'التطبيق',
-      info_title: 'إعدادات القالب',
-      info_text: 'القالب مبني على Bootstrap ويدعم RTL/LTR و Dark/Light.',
       theme_dark: '🌙 داكن',
       theme_light: '☀️ فاتح',
-      calendar_fallback: 'تعذر تحميل التقويم، تحقق من الشبكة.',
-      date_fallback: 'تعذر تحميل أداة التاريخ/الوقت.'
+      notify_saved: 'تم حفظ الإعدادات بنجاح',
+      notify_warning_msg: 'يوجد عناصر تحتاج متابعة عاجلة.',
+      notify_title: 'النظام',
+      info_title: 'تفاصيل التنبيه',
+      info_text: 'القالب مبني بأسلوب Bootstrap-first ويعمل بسلاسة مع RTL/LTR.',
+      calendar_fallback: 'تعذر تحميل التقويم. تحقق من الاتصال بالشبكة.',
+      date_fallback: 'تعذر تحميل أداة التاريخ والوقت.'
     },
     en: {
-      app_title: 'Projects Dashboard',
-      welcome: 'Welcome to Projects Template',
-      subtitle: 'Arabic-first template with RTL/LTR, dark mode, and i18n.',
-      notify_saved: 'Settings saved successfully',
-      notify_warning_msg: 'There are overdue tasks that need follow-up.',
-      notify_title: 'App',
-      info_title: 'Template Settings',
-      info_text: 'Template is Bootstrap-first with RTL/LTR and Dark/Light support.',
       theme_dark: '🌙 Dark',
       theme_light: '☀️ Light',
-      calendar_fallback: 'Calendar failed to load. Please check network access.',
-      date_fallback: 'Date/Time picker failed to load.'
+      notify_saved: 'Settings were saved successfully',
+      notify_warning_msg: 'There are items that require immediate follow-up.',
+      notify_title: 'System',
+      info_title: 'Alert Details',
+      info_text: 'This template follows a Bootstrap-first approach with smooth RTL/LTR support.',
+      calendar_fallback: 'Calendar failed to load. Please check your network connection.',
+      date_fallback: 'Date/time picker failed to load.'
     }
   };
 
@@ -36,7 +30,6 @@
   };
 
   const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
   const state = {
     locale: localStorage.getItem('app_locale') || 'ar',
     theme: localStorage.getItem('app_theme') || preferredTheme,
@@ -45,8 +38,8 @@
 
   const el = {
     bootstrapCss: document.getElementById('bootstrapCss'),
-    localeSelect: document.getElementById('localeSelect'),
-    mobileLocale: document.getElementById('mobileLocale'),
+    localeToggle: document.getElementById('localeToggle'),
+    mobileLocaleToggle: document.getElementById('mobileLocaleToggle'),
     themeToggle: document.getElementById('themeToggle'),
     mobileThemeToggle: document.getElementById('mobileThemeToggle'),
     successToast: document.getElementById('successToast'),
@@ -65,15 +58,21 @@
     const isArabic = locale === 'ar';
     document.documentElement.lang = locale;
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    document.body.classList.remove('dir-rtl', 'dir-ltr');
+    document.body.classList.add(isArabic ? 'dir-rtl' : 'dir-ltr');
     if (el.bootstrapCss) el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
   };
 
   const syncThemeButtons = (theme) => {
-    const darkLabel = state.dictionary.theme_dark || '🌙 Dark';
-    const lightLabel = state.dictionary.theme_light || '☀️ Light';
-    const label = theme === 'dark' ? lightLabel : darkLabel;
+    const label = theme === 'dark' ? (state.dictionary.theme_light || '☀️ Light') : (state.dictionary.theme_dark || '🌙 Dark');
     if (el.themeToggle) el.themeToggle.textContent = label;
     if (el.mobileThemeToggle) el.mobileThemeToggle.textContent = label;
+  };
+
+  const syncLocaleButtons = (locale) => {
+    const label = locale === 'ar' ? '🌐 English (LTR)' : '🌐 العربية (RTL)';
+    if (el.localeToggle) el.localeToggle.textContent = label;
+    if (el.mobileLocaleToggle) el.mobileLocaleToggle.textContent = label;
   };
 
   const setTheme = (theme) => {
@@ -88,25 +87,23 @@
       const key = node.getAttribute('data-i18n');
       if (dict[key]) node.textContent = dict[key];
     });
-    syncThemeButtons(state.theme);
     if (el.calendarFallback) el.calendarFallback.textContent = dict.calendar_fallback || el.calendarFallback.textContent;
     if (el.dateFallback) el.dateFallback.textContent = dict.date_fallback || el.dateFallback.textContent;
+    syncThemeButtons(state.theme);
   };
 
   const loadLocale = async (locale) => {
     let dict = fallbackDictionaries[locale] || fallbackDictionaries.ar;
-
     try {
       const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
-      if (response.ok) {
-        dict = await response.json();
-      }
+      if (response.ok) dict = await response.json();
     } catch (error) {
       console.warn('Locale fetch fallback:', error);
     }
 
     applyTranslations(dict);
     setDirection(locale);
+    syncLocaleButtons(locale);
 
     if (calendar) {
       calendar.setOption('locale', locale === 'ar' ? 'ar' : 'en');
@@ -115,67 +112,39 @@
     }
 
     localStorage.setItem('app_locale', locale);
-    if (el.localeSelect) el.localeSelect.value = locale;
-    if (el.mobileLocale) el.mobileLocale.value = locale;
   };
 
   const initCalendar = () => {
-    if (!window.FullCalendar || !document.getElementById('calendar')) {
-      if (el.calendarFallback) el.calendarFallback.classList.remove('d-none');
-      return;
-    }
-
+    const calendarEl = document.getElementById('calendar');
+    if (!window.FullCalendar || !calendarEl) return;
     try {
-      const calendarEl = document.getElementById('calendar');
       calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: state.locale,
         direction: state.locale === 'ar' ? 'rtl' : 'ltr',
-        headerToolbar: {
-          start: 'prev,next today',
-          center: 'title',
-          end: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
+        headerToolbar: { start: 'prev,next today', center: 'title', end: 'dayGridMonth,timeGridWeek' },
         events: [
           { title: 'Sprint Planning', start: new Date().toISOString().slice(0, 10) },
-          { title: 'Client Meeting', start: new Date(Date.now() + 86400000).toISOString().slice(0, 10) }
+          { title: 'Client Review', start: new Date(Date.now() + 86400000).toISOString().slice(0, 10) }
         ]
       });
-
       calendar.render();
-      if (el.calendarFallback) el.calendarFallback.classList.add('d-none');
     } catch (error) {
-      console.warn('Calendar init failed:', error);
       if (el.calendarFallback) el.calendarFallback.classList.remove('d-none');
     }
   };
 
   const initDatePicker = () => {
-    if (!window.flatpickr || !document.getElementById('meetingDate')) {
-      if (el.dateFallback) el.dateFallback.classList.remove('d-none');
-      return;
-    }
-
-    try {
-      flatpickr('#meetingDate', {
-        enableTime: true,
-        dateFormat: 'Y-m-d H:i',
-        time_24hr: true
-      });
-      if (el.dateFallback) el.dateFallback.classList.add('d-none');
-    } catch (error) {
-      console.warn('Date picker init failed:', error);
-      if (el.dateFallback) el.dateFallback.classList.remove('d-none');
-    }
+    if (!window.flatpickr || !document.getElementById('meetingDate')) return;
+    try { flatpickr('#meetingDate', { enableTime: true, dateFormat: 'Y-m-d H:i', time_24hr: true }); }
+    catch (error) { if (el.dateFallback) el.dateFallback.classList.remove('d-none'); }
   };
 
-  const initNowClock = () => {
-    const updateClock = () => {
-      if (el.currentTime) el.currentTime.textContent = new Date().toLocaleString(document.documentElement.lang || 'ar');
-    };
-
-    updateClock();
-    setInterval(updateClock, 1000);
+  const initClock = () => {
+    if (!el.currentTime) return;
+    const tick = () => { el.currentTime.textContent = new Date().toLocaleString(document.documentElement.lang || 'ar'); };
+    tick();
+    setInterval(tick, 1000);
   };
 
   const toggleTheme = () => {
@@ -183,76 +152,34 @@
     setTheme(state.theme);
   };
 
+  const toggleLocale = () => {
+    state.locale = state.locale === 'ar' ? 'en' : 'ar';
+    loadLocale(state.locale);
+  };
 
   const toggleSidebar = () => {
     if (!el.appSidebar) return;
-
-    if (window.innerWidth <= 991) {
-      el.appSidebar.classList.toggle('open');
-    } else {
-      document.body.classList.toggle('sidebar-collapsed');
-    }
+    if (window.innerWidth <= 991) el.appSidebar.classList.toggle('open');
+    else document.body.classList.toggle('sidebar-collapsed');
   };
 
   const bindEvents = () => {
-    if (el.localeSelect) {
-      el.localeSelect.addEventListener('change', (e) => {
-        state.locale = e.target.value;
-        loadLocale(state.locale);
-      });
-    }
-
-    if (el.mobileLocale) {
-      el.mobileLocale.addEventListener('change', (e) => {
-        state.locale = e.target.value;
-        loadLocale(state.locale);
-      });
-    }
-
-    if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
-
-    document.addEventListener('click', (event) => {
-      if (!el.appSidebar || window.innerWidth > 991) return;
-      if (!el.appSidebar.classList.contains('open')) return;
-      const clickedInsideSidebar = el.appSidebar.contains(event.target);
-      const clickedToggle = el.sidebarToggle && el.sidebarToggle.contains(event.target);
-      if (!clickedInsideSidebar && !clickedToggle) {
-        el.appSidebar.classList.remove('open');
-      }
-    });
+    if (el.localeToggle) el.localeToggle.addEventListener('click', toggleLocale);
+    if (el.mobileLocaleToggle) el.mobileLocaleToggle.addEventListener('click', toggleLocale);
     if (el.themeToggle) el.themeToggle.addEventListener('click', toggleTheme);
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
+    if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
 
-    if (el.successToast) {
-      el.successToast.addEventListener('click', () => {
-        toastr.success(state.dictionary.notify_saved || 'Saved', state.dictionary.notify_title || 'App');
-      });
-    }
-
-    if (el.warningToast) {
-      el.warningToast.addEventListener('click', () => {
-        toastr.warning(state.dictionary.notify_warning_msg || 'Warning', state.dictionary.notify_title || 'App');
-      });
-    }
-
-    if (el.infoAlert) {
-      el.infoAlert.addEventListener('click', () => {
-        Swal.fire({
-          icon: 'info',
-          title: state.dictionary.info_title || 'Info',
-          text: state.dictionary.info_text || ''
-        });
-      });
-    }
+    if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
+    if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
+    if (el.infoAlert) el.infoAlert.addEventListener('click', () => Swal.fire({ icon: 'info', title: state.dictionary.info_title, text: state.dictionary.info_text }));
   };
 
   const init = async () => {
-    if (el.localeSelect) el.localeSelect.value = state.locale;
-    if (el.mobileLocale) el.mobileLocale.value = state.locale;
     setTheme(state.theme);
     initCalendar();
     initDatePicker();
-    initNowClock();
+    initClock();
     bindEvents();
     await loadLocale(state.locale);
   };

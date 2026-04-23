@@ -1,31 +1,23 @@
-# Nozha-Dashboard:
-![picture](img/banner.jpg)
+# ZAHA Flow Theme
 
-Nozha Admin Panel is a free to use Bootstrap admin template. This template uses the default Bootstrap 4 styles for creating admin panels or back-end dashboards.
-its support Rtl language like persian, arabic and etc .
-You can use Dark mode on this theme.
+قالب RTL/LTR مبني على Bootstrap مع دعم عربي/إنجليزي كامل.
 
+## أهم النقاط
+- عند تبديل اللغة يتم:
+  - تغيير اتجاه النص.
+  - تغيير مكان السايدبار (يمين في العربية / يسار في الإنجليزية).
+- السايدبار بتدرج فاتح في وضع Light ومتوافق مع وضع Dark.
+- ترجمة عناصر الواجهة الأساسية (القائمة، التنبيهات، إعدادات البروفايل، أزرار اللغة/الثيم).
 
- 
-# Demo-Picture:
-[Demo page](https://majidalinejad.github.io/Nozha-rtl-Dashboard/)
-admin panel with doc
-***
-![picture](img/screen.jpg)
-***
+## الصفحات
+- `index.html` (Dashboard كامل)
+- `calendar.html`
+- `datetime.html`
+- `notifications.html`
+- `sidebar.html`
+- `colors.html`
+- `zaha-identity.html`
+- `Login.html` / `forgot-password.html`
 
-# Farsi Demo-Picture:
-[Demo page](https://majidalinejad.github.io/Nozha-rtl-Dashboard/fa.html)
-پنل ادمین فارسی به همراه داکیومنت
-***
-![picture](img/screen-fa.jpg)
-
-# Scripts included:
-- Bootstrap
-- Font Awesome
-- Charts.js
-- jQuery
- 
-# License information:
-Nozha is licensed under OpenSource. Which means that you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.
-Project is developed and maintained by Negarafar and Majid Alinejad.
+## تشغيل
+افتح `index.html` عبر أي static server.
