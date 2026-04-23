@@ -94,3 +94,11 @@
 41. Restored old-style notifications + dropdowns in topbar (envelope, bell, user profile menu).
 42. Adjusted sidebar visual theme to dark Nozha-like gradient and original menu behavior style.
 43. Kept unified RTL/LTR + theme + locale runtime behavior on top of restored visual shell.
+
+## 2026-04-23 (dropdown + sidebar behavior fixes)
+
+44. Fixed dropdown issues after classic navbar restore by improving topbar/dropdown layering (`z-index`, overflow-visible behavior).
+45. Improved sidebar toggle JS: mobile opens/closes drawer, desktop toggles collapsed sidebar state.
+46. Ensured sidebar slide direction follows language direction (RTL from right, LTR from left).
+47. Renamed theme identity in page titles/branding to **ZAHA Flow Theme**.
+48. Applied refined ZAHA color palette tokens to page, navbar, sidebar, cards, and action buttons for professional UI consistency.

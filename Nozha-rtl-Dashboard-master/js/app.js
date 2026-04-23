@@ -186,7 +186,12 @@
 
   const toggleSidebar = () => {
     if (!el.appSidebar) return;
-    el.appSidebar.classList.toggle('open');
+
+    if (window.innerWidth <= 991) {
+      el.appSidebar.classList.toggle('open');
+    } else {
+      document.body.classList.toggle('sidebar-collapsed');
+    }
   };
 
   const bindEvents = () => {
@@ -205,6 +210,16 @@
     }
 
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
+
+    document.addEventListener('click', (event) => {
+      if (!el.appSidebar || window.innerWidth > 991) return;
+      if (!el.appSidebar.classList.contains('open')) return;
+      const clickedInsideSidebar = el.appSidebar.contains(event.target);
+      const clickedToggle = el.sidebarToggle && el.sidebarToggle.contains(event.target);
+      if (!clickedInsideSidebar && !clickedToggle) {
+        el.appSidebar.classList.remove('open');
+      }
+    });
     if (el.themeToggle) el.themeToggle.addEventListener('click', toggleTheme);
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
 

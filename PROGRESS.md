@@ -1,7 +1,7 @@
 # RTL Theme Progress Report
 
 ## Current completion
-- **Overall completion: 98%**
+- **Overall completion: 99%**
 
 ## Completed
 1. Generic naming structure (`index.html`, `Theme.css`, `Style.css`, `app.js`).
@@ -19,6 +19,7 @@
 13. Restored original-theme-like sidebar/topbar structure and interactions for visual consistency.
 14. Converted all theme HTML pages to the new shell while keeping unified nav/sidebar style.
 15. Restored old-style Nozha navbar/dropdowns/notification look (`navbar navbar-light bg-faded animate__animated animate__fadeInDown`) across all pages.
+16. Fixed dropdown layering + improved sidebar JS toggle behavior and direction-aware slide for RTL/LTR.
 
 ## Remaining work (next milestones)
 1. **Template cleanup and packaging (1%)**
