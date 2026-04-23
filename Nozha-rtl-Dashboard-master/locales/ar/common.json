@@ -38,5 +38,11 @@
   "theme_dark": "🌙 داكن",
   "theme_light": "☀️ فاتح",
   "calendar_fallback": "تعذر تحميل التقويم. تحقق من الاتصال بالشبكة.",
-  "date_fallback": "تعذر تحميل أداة التاريخ والوقت."
+  "date_fallback": "تعذر تحميل أداة التاريخ والوقت.",
+  "menu_sidebar": "السايدبار",
+  "menu_toast": "Toast",
+  "menu_pagination": "Pagination",
+  "menu_colors": "الألوان",
+  "menu_identity": "هوية زها",
+  "menu_readme_page": "README بسيط"
 }

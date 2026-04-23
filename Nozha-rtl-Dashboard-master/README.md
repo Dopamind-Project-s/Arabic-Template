@@ -1,36 +1,21 @@
-# ZAHA Flow Theme (Arabic RTL Bootstrap Dashboard)
+# ZAHA Flow Theme
 
-قالب إداري عربي حديث مبني على **Bootstrap 5.3** مع دعم احترافي للاتجاهين **RTL / LTR** ووضعي **Light / Dark**.
+قالب Bootstrap RTL/LTR وكل فيتشر في صفحة مستقلة.
 
-## المميزات الأساسية
-- Bootstrap-first layout بدون تعارض مع أطر إضافية.
-- سايد بار واضح مع صفحات فعلية لكل ميزة رئيسية.
-- دعم i18n (العربية / الإنجليزية) مع تحميل ملفات ترجمة JSON.
-- Dark/Light mode محفوظ في LocalStorage.
-- FullCalendar + Flatpickr للجدولة والتواريخ.
-- Toastr + SweetAlert للإشعارات.
+## الصفحات
+- `index.html` (حالة المشروع + مستوى الإنجاز)
+- `card.html` (Cards)
+- `Chart.html` (Analytics)
+- `Input.html` (Forms)
+- `modal.html` (Notifications)
+- `sidebar.html` (Sidebar example)
+- `toast.htm` (Toast example)
+- `pagination.html` (Pagination example)
+- `colors.html` (صفحة الألوان)
+- `zaha-identity.html` (صفحة هوية زها)
+- `feature-readme.html` (README بسيط داخل الثيم)
+- `Login.html` + `forgot-password.html`
 
-## هيكل الصفحات المعتمد
-- `index.html` : لوحة التحكم + KPI + تقويم + وقت/تاريخ.
-- `card.html` : كروت الألوان الجديدة (Gradients).
-- `Chart.html` : مؤشرات وتحليلات.
-- `Input.html` : نماذج الإدخال.
-- `modal.html` : إشعارات (نجاح/تحذير/معلومة).
-- `sidebar.html` : الإعدادات العامة.
-- `Login.html` : صفحة دخول احترافية مع هوية ZAHA Flow.
-- `forgot-password.html` : صفحة نسيت كلمة المرور.
-
-## الملفات المهمة
-- `css/Theme.css` : ألوان ومتغيرات الثيم (فاتح/داكن).
-- `css/Style.css` : التخطيط والمظهر العام والسايدبار.
-- `js/app.js` : إدارة اللغة، الثيم، الاتجاه، والميزات الديناميكية.
-- `locales/ar/common.json` و `locales/en/common.json` : النصوص والترجمة.
-
-## تشغيل محلي سريع
-يمكن تشغيل المشروع بأي Static Server (مثل VS Code Live Server) وفتح:
-`Nozha-rtl-Dashboard-master/index.html`
-
-## ملاحظات الجودة
-- تم حذف الصفحات والملفات والصور غير المستخدمة من الثيم.
-- تم تنظيف النصوص وتوحيد التسميات داخل الواجهة.
-- تم الإبقاء على Bootstrap كمحور رئيسي لكل الواجهات.
+## ملاحظات
+- اسم المشروع: **ZAHA Flow**.
+- اللوجو المستخدم: `svg/logo-grey.svg`.

@@ -38,5 +38,11 @@
   "theme_dark": "🌙 Dark",
   "theme_light": "☀️ Light",
   "calendar_fallback": "Calendar failed to load. Please check your network connection.",
-  "date_fallback": "Date/time picker failed to load."
+  "date_fallback": "Date/time picker failed to load.",
+  "menu_sidebar": "Sidebar",
+  "menu_toast": "Toast",
+  "menu_pagination": "Pagination",
+  "menu_colors": "Colors",
+  "menu_identity": "ZAHA Identity",
+  "menu_readme_page": "Simple README"
 }
