@@ -95,3 +95,29 @@ body.sidebar-collapsed .side-item span { display: none; }
   [dir="ltr"] .sidebar-original { left: 0; transform: translateX(-100%); }
   .sidebar-original.open { transform: translateX(0)!important; }
 }
+
+.auth-layout {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(13,110,253,.18), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(32,201,151,.14), transparent 38%),
+    var(--page-bg);
+}
+
+.auth-card {
+  background: var(--surface-bg);
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.auth-cover {
+  background: linear-gradient(160deg, #0d6efd, #6f42c1);
+  color: #fff;
+  padding: 2rem;
+  align-items: flex-end;
+}
+
+.auth-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
