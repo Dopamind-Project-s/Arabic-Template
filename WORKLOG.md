@@ -80,3 +80,10 @@
 33. Updated `Style.css` with original-like side menu item styling (`side-comment`, selected state, compact nav look).
 34. Added responsive sidebar toggle behavior in `app.js` via `#sidebarToggle` + `.open` class.
 35. Kept new RTL/LTR, i18n, theme, calendar, and notification behavior while preserving original look direction.
+
+## 2026-04-23 (full pages migration)
+
+36. Converted all legacy HTML pages in `Nozha-rtl-Dashboard-master/*.html` to the new unified shell.
+37. Kept the same navbar + sidebar structure/style across all converted pages.
+38. Cleaned page bodies to remove old mixed markup and replaced with consistent card-based placeholders for phased component rebuild.
+39. Updated dashboard navigation links to actual migrated pages for easier traversal.
