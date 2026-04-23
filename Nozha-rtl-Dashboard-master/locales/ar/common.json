@@ -47,5 +47,11 @@
   "menu_readme_page": "README بسيط",
   "menu_calendar_page": "التقويم",
   "menu_datetime_page": "التاريخ والوقت",
-  "menu_notify_page": "الإشعارات"
+  "menu_notify_page": "الإشعارات",
+  "msg_new": "4 رسائل جديدة",
+  "see_all": "عرض الكل",
+  "notif_count": "8 إشعارات",
+  "settings": "الإعدادات",
+  "login": "تسجيل الدخول",
+  "logout": "تسجيل الخروج"
 }

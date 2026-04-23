@@ -1,20 +1,23 @@
 # ZAHA Flow Theme
 
-قالب Bootstrap RTL/LTR مع ناڤ بار بنفس ستايل Nozha (رسائل + إشعارات + بروفايل + إعدادات/تسجيل دخول) وكل فيتشر في صفحة مستقلة.
+قالب RTL/LTR مبني على Bootstrap مع دعم عربي/إنجليزي كامل.
 
-## الصفحات الأساسية
-- `index.html` (Dashboard كامل: KPI + Calendar + DateTime + Notifications)
-- `calendar.html` (Feature منفصل للتقويم)
-- `datetime.html` (Feature منفصل للتاريخ والوقت)
-- `notifications.html` (Feature منفصل للإشعارات)
+## أهم النقاط
+- عند تبديل اللغة يتم:
+  - تغيير اتجاه النص.
+  - تغيير مكان السايدبار (يمين في العربية / يسار في الإنجليزية).
+- السايدبار بتدرج فاتح في وضع Light ومتوافق مع وضع Dark.
+- ترجمة عناصر الواجهة الأساسية (القائمة، التنبيهات، إعدادات البروفايل، أزرار اللغة/الثيم).
+
+## الصفحات
+- `index.html` (Dashboard كامل)
+- `calendar.html`
+- `datetime.html`
+- `notifications.html`
 - `sidebar.html`
-- `toast.htm`
-- `pagination.html`
 - `colors.html`
 - `zaha-identity.html`
-- `feature-readme.html`
-- `Login.html` + `forgot-password.html`
+- `Login.html` / `forgot-password.html`
 
-## هوية المشروع
-- اسم المشروع: **ZAHA Flow**
-- اللوجو: `svg/logo-grey.svg`
+## تشغيل
+افتح `index.html` عبر أي static server.

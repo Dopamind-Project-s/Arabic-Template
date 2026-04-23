@@ -19,7 +19,7 @@
   <div class="layout-shell">
     <aside id="appSidebar" class="sidebar-original">
       <div class="sidebar-brand"><img class="brand-logo" src="./svg/logo-grey.svg" alt="ZAHA Logo"><span class="brand-title">Nozha</span></div>
-      <p class="side-comment">القائمة السريعة</p>
+      <p class="side-comment" data-i18n="quick_menu">القائمة السريعة</p>
       <ul class="side-list"><li class="side-item "><a href="./index.html"><i class="fas fa-gauge-high"></i><span data-i18n="menu_dashboard">الرئيسية</span></a></li>
 <li class="side-item "><a href="./calendar.html"><i class="fas fa-calendar-days"></i><span data-i18n="menu_calendar_page">التقويم</span></a></li>
 <li class="side-item "><a href="./datetime.html"><i class="fas fa-clock"></i><span data-i18n="menu_datetime_page">التاريخ والوقت</span></a></li>
@@ -33,7 +33,7 @@
 <li class="side-item "><a href="./colors.html"><i class="fas fa-palette"></i><span data-i18n="menu_colors">الألوان</span></a></li>
 <li class="side-item "><a href="./zaha-identity.html"><i class="fas fa-gem"></i><span data-i18n="menu_identity">هوية زها</span></a></li>
 <li class="side-item selected"><a href="./feature-readme.html"><i class="fas fa-book-open"></i><span data-i18n="menu_readme_page">README بسيط</span></a></li></ul>
-      <p class="side-comment">اللغة</p>
+      <p class="side-comment" data-i18n="language">اللغة</p>
       <button id="mobileLocaleToggle" class="btn btn-outline-info w-100 mb-2">🌐 English (LTR)</button>
       <button id="mobileThemeToggle" class="btn btn-outline-light w-100">🌙 داكن</button>
     </aside>
@@ -44,19 +44,19 @@
           <ul class="nav ms-auto align-items-center gap-2 topbar-actions">
             <li class="nav-item dropdown">
               <button class="btn icon-dd" data-bs-toggle="dropdown"><i class="far fa-envelope"></i><span class="badge bg-danger rounded-pill">5</span><i class="fas fa-caret-down tiny-caret"></i></button>
-              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#">4 رسائل جديدة</a></li><li><a class="dropdown-item" href="#">عرض الكل</a></li></ul>
+              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#" data-i18n="msg_new">4 رسائل جديدة</a></li><li><a class="dropdown-item" href="#" data-i18n="see_all">عرض الكل</a></li></ul>
             </li>
             <li class="nav-item dropdown">
               <button class="btn icon-dd" data-bs-toggle="dropdown"><i class="far fa-bell"></i><span class="badge bg-warning text-dark rounded-pill">5</span><i class="fas fa-caret-down tiny-caret"></i></button>
-              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#">8 إشعارات</a></li><li><a class="dropdown-item" href="#">عرض الكل</a></li></ul>
+              <ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#" data-i18n="notif_count">8 إشعارات</a></li><li><a class="dropdown-item" href="#" data-i18n="see_all">عرض الكل</a></li></ul>
             </li>
             <li class="nav-item"><span class="top-avatar top-avatar-icon"><i class="fas fa-user-astronaut"></i></span></li>
             <li class="nav-item dropdown">
               <button class="btn btn-profile dropdown-toggle" data-bs-toggle="dropdown">MAJID</button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="./sidebar.html"><i class="fas fa-gear me-2"></i>Settings</a></li>
-                <li><a class="dropdown-item" href="./Login.html"><i class="fas fa-right-to-bracket me-2"></i>Login</a></li>
-                <li><a class="dropdown-item" href="#"><i class="fas fa-right-from-bracket me-2"></i>Logout</a></li>
+                <li><a class="dropdown-item" href="./sidebar.html" data-i18n="settings"><i class="fas fa-gear me-2"></i>Settings</a></li>
+                <li><a class="dropdown-item" href="./Login.html" data-i18n="login"><i class="fas fa-right-to-bracket me-2"></i>Login</a></li>
+                <li><a class="dropdown-item" href="#" data-i18n="logout"><i class="fas fa-right-from-bracket me-2"></i>Logout</a></li>
                 <li><button id="themeToggle" class="dropdown-item" type="button">🌙 Dark</button></li>
               </ul>
             </li>
