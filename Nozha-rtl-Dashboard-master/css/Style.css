@@ -1,0 +1,70 @@
+.topbar {
+  background: var(--surface-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  background: var(--surface-bg);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+}
+
+.stat-card {
+  border-inline-start: 4px solid var(--brand-primary);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .offcanvas,
+[data-theme="dark"] .modal-content {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-color: var(--border-color);
+  background: var(--surface-bg);
+  color: var(--text-color);
+}
+
+.offcanvas {
+  background: var(--surface-bg);
+  color: var(--text-color);
+}
+
+.fc .fc-button-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:hover {
+  background-color: var(--brand-secondary);
+  border-color: var(--brand-secondary);
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+  border-color: var(--border-color);
+}
+
+#calendar {
+  min-height: 420px;
+}
+
+.control-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 991.98px) {
+  #calendar {
+    min-height: 360px;
+  }
+}

@@ -1,0 +1,58 @@
+:root {
+  --brand-primary: #0e5a7a;
+  --brand-secondary: #29a36a;
+  --brand-accent: #f4b400;
+  --page-bg: #f5f8fb;
+  --surface-bg: #ffffff;
+  --text-color: #1f2937;
+  --muted-color: #6b7280;
+  --border-color: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="dark"] {
+  --brand-primary: #58a6c6;
+  --brand-secondary: #50c58d;
+  --brand-accent: #ffcd4a;
+  --page-bg: #111827;
+  --surface-bg: #1f2937;
+  --text-color: #f9fafb;
+  --muted-color: #cbd5e1;
+  --border-color: rgba(255, 255, 255, 0.12);
+}
+
+html,
+body {
+  background: var(--page-bg);
+  color: var(--text-color);
+  font-family: "Cairo", "Tajawal", "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.text-muted {
+  color: var(--muted-color) !important;
+}
+
+.btn-theme {
+  color: #fff;
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.btn-theme:hover,
+.btn-theme:focus {
+  color: #fff;
+  background: var(--brand-secondary);
+  border-color: var(--brand-secondary);
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-color);
+}
+
+.badge.text-bg-warning {
+  color: #2f2100 !important;
+}
