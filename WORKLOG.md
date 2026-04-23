@@ -66,3 +66,10 @@
 26. Switched template branding image source to existing text-based SVG asset:
     - `./svg/logo.svg`
 27. This keeps PR diff binary-free for newly introduced assets and avoids upload blockers in platforms that reject binary diffs.
+
+## 2026-04-23 (hardening continuation)
+
+28. Added visible fallback alerts in `index.html` for calendar and datepicker load failures.
+29. Hardened `js/app.js` initialization logic with safe checks and try/catch around FullCalendar/Flatpickr startup.
+30. Added translation keys for fallback alerts in both locale files (AR/EN).
+31. Updated `PROGRESS.md` to reflect increased completion after hardening work.

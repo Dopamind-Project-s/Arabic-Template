@@ -40,5 +40,7 @@
   "info_title": "إعدادات القالب",
   "info_text": "القالب مبني على Bootstrap ويدعم RTL/LTR و Dark/Light.",
   "theme_dark": "🌙 داكن",
-  "theme_light": "☀️ فاتح"
+  "theme_light": "☀️ فاتح",
+  "calendar_fallback": "تعذر تحميل التقويم، تحقق من الشبكة.",
+  "date_fallback": "تعذر تحميل أداة التاريخ/الوقت."
 }

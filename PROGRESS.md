@@ -1,7 +1,7 @@
 # RTL Theme Progress Report
 
 ## Current completion
-- **Overall completion: 82%**
+- **Overall completion: 86%**
 
 ## Completed
 1. Generic naming structure (`index.html`, `Theme.css`, `Style.css`, `app.js`).
@@ -15,15 +15,16 @@
 9. AR/EN localization dictionaries expanded to cover all visible labels.
 10. i18n validation utility script (`scripts/validate_i18n.py`).
 11. Removed newly-added binary logo assets and switched to SVG branding path for safer PR upload compatibility.
+12. Added runtime fallbacks for calendar/datepicker with user-visible warning states.
 
 ## Remaining work (next milestones)
 1. **Template cleanup and packaging (4%)**
    - Move legacy pages into archive folder or remove unused demos after confirmation.
    - Keep only required assets/libraries.
-2. **Production hardening (8%)**
+2. **Production hardening (5%)**
    - Add error boundaries for plugin init failures.
    - Add graceful empty-state UI for calendar/table data.
-3. **Accessibility + QA (5%)**
+3. **Accessibility + QA (6%)**
    - Keyboard-flow test for modal/tabs/offcanvas.
    - Color contrast review for dark mode badges/buttons.
 4. **Documentation handover (1%)**

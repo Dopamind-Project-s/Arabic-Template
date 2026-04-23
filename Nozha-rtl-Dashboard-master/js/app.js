@@ -10,7 +10,9 @@
       info_title: 'إعدادات القالب',
       info_text: 'القالب مبني على Bootstrap ويدعم RTL/LTR و Dark/Light.',
       theme_dark: '🌙 داكن',
-      theme_light: '☀️ فاتح'
+      theme_light: '☀️ فاتح',
+      calendar_fallback: 'تعذر تحميل التقويم، تحقق من الشبكة.',
+      date_fallback: 'تعذر تحميل أداة التاريخ/الوقت.'
     },
     en: {
       app_title: 'Projects Dashboard',
@@ -22,7 +24,9 @@
       info_title: 'Template Settings',
       info_text: 'Template is Bootstrap-first with RTL/LTR and Dark/Light support.',
       theme_dark: '🌙 Dark',
-      theme_light: '☀️ Light'
+      theme_light: '☀️ Light',
+      calendar_fallback: 'Calendar failed to load. Please check network access.',
+      date_fallback: 'Date/Time picker failed to load.'
     }
   };
 
@@ -48,7 +52,9 @@
     successToast: document.getElementById('successToast'),
     warningToast: document.getElementById('warningToast'),
     infoAlert: document.getElementById('infoAlert'),
-    currentTime: document.getElementById('currentTime')
+    currentTime: document.getElementById('currentTime'),
+    calendarFallback: document.getElementById('calendarFallback'),
+    dateFallback: document.getElementById('dateFallback')
   };
 
   let calendar;
@@ -81,6 +87,8 @@
       if (dict[key]) node.textContent = dict[key];
     });
     syncThemeButtons(state.theme);
+    if (el.calendarFallback) el.calendarFallback.textContent = dict.calendar_fallback || el.calendarFallback.textContent;
+    if (el.dateFallback) el.dateFallback.textContent = dict.date_fallback || el.dateFallback.textContent;
   };
 
   const loadLocale = async (locale) => {
@@ -110,31 +118,53 @@
   };
 
   const initCalendar = () => {
-    const calendarEl = document.getElementById('calendar');
-    calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      locale: state.locale,
-      direction: state.locale === 'ar' ? 'rtl' : 'ltr',
-      headerToolbar: {
-        start: 'prev,next today',
-        center: 'title',
-        end: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      events: [
-        { title: 'Sprint Planning', start: new Date().toISOString().slice(0, 10) },
-        { title: 'Client Meeting', start: new Date(Date.now() + 86400000).toISOString().slice(0, 10) }
-      ]
-    });
+    if (!window.FullCalendar || !document.getElementById('calendar')) {
+      el.calendarFallback.classList.remove('d-none');
+      return;
+    }
 
-    calendar.render();
+    try {
+      const calendarEl = document.getElementById('calendar');
+      calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: state.locale,
+        direction: state.locale === 'ar' ? 'rtl' : 'ltr',
+        headerToolbar: {
+          start: 'prev,next today',
+          center: 'title',
+          end: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          { title: 'Sprint Planning', start: new Date().toISOString().slice(0, 10) },
+          { title: 'Client Meeting', start: new Date(Date.now() + 86400000).toISOString().slice(0, 10) }
+        ]
+      });
+
+      calendar.render();
+      el.calendarFallback.classList.add('d-none');
+    } catch (error) {
+      console.warn('Calendar init failed:', error);
+      el.calendarFallback.classList.remove('d-none');
+    }
   };
 
   const initDatePicker = () => {
-    flatpickr('#meetingDate', {
-      enableTime: true,
-      dateFormat: 'Y-m-d H:i',
-      time_24hr: true
-    });
+    if (!window.flatpickr) {
+      el.dateFallback.classList.remove('d-none');
+      return;
+    }
+
+    try {
+      flatpickr('#meetingDate', {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        time_24hr: true
+      });
+      el.dateFallback.classList.add('d-none');
+    } catch (error) {
+      console.warn('Date picker init failed:', error);
+      el.dateFallback.classList.remove('d-none');
+    }
   };
 
   const initNowClock = () => {

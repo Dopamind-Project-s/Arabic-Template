@@ -100,6 +100,7 @@
         <div class="card p-3 h-100">
           <h2 class="h5 mb-3" data-i18n="calendar">التقويم</h2>
           <div id="calendar"></div>
+          <div id="calendarFallback" class="alert alert-warning mt-3 d-none" role="alert" data-i18n="calendar_fallback">تعذر تحميل التقويم، تحقق من الشبكة.</div>
         </div>
       </div>
       <div class="col-lg-4">
@@ -108,6 +109,7 @@
           <label for="meetingDate" class="form-label" data-i18n="meeting_date">موعد الاجتماع</label>
           <input id="meetingDate" class="form-control mb-2" placeholder="Pick meeting datetime">
           <small id="currentTime" class="text-muted"></small>
+          <div id="dateFallback" class="alert alert-warning mt-2 d-none" role="alert" data-i18n="date_fallback">تعذر تحميل أداة التاريخ/الوقت.</div>
         </div>
 
         <div class="card p-3 mb-3">
