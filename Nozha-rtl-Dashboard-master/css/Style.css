@@ -1,7 +1,9 @@
 .layout-shell { display: flex; min-height: 100vh; }
 
-body.dir-rtl .layout-shell { flex-direction: row-reverse; }
-body.dir-ltr .layout-shell { flex-direction: row; }
+body.dir-ltr .sidebar-original { order: 1; }
+body.dir-ltr .content-shell { order: 2; }
+body.dir-rtl .sidebar-original { order: 2; }
+body.dir-rtl .content-shell { order: 1; }
 
 .sidebar-original {
   width: 230px;
