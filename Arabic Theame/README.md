@@ -109,7 +109,22 @@
 ## هيكل المشروع
 
 ```text
-Nozha-rtl-Dashboard-master/
+Arabic Theame/
+├── assets/
+│   ├── favicon/
+│   │   ├── favicon.ico
+│   │   ├── favicon-16x16.png
+│   │   ├── favicon-32x32.png
+│   │   ├── apple-touch-icon.png
+│   │   ├── android-chrome-192x192.png
+│   │   ├── android-chrome-512x512.png
+│   │   └── site.webmanifest
+│   ├── images/
+│   └── logos/
+│       ├── logo.svg
+│       ├── logo2.svg
+│       ├── logo.png
+│       └── logo2.png
 ├── css/
 │   ├── Theme.css
 │   └── Style.css
@@ -119,7 +134,7 @@ Nozha-rtl-Dashboard-master/
 │   ├── ar/common.json
 │   └── en/common.json
 ├── *.html / *.htm
-├── logo.svg / logo2.svg / logo.png / logo2.png
+├── vendor/
 └── README.md
 ```
 
@@ -137,7 +152,7 @@ Nozha-rtl-Dashboard-master/
 مثال سريع عبر Python:
 
 ```bash
-cd Nozha-rtl-Dashboard-master
+cd "Arabic Theame"
 python -m http.server 8080
 ```
 
