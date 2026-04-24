@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>النماذج - ZAHA Flow Theme</title>
+  <title>الرئيسية - ZAHA Flow Theme</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,15 +18,15 @@
 <body>
   <div class="layout-shell">
     <aside id="appSidebar" class="sidebar-original">
-      <div class="sidebar-brand"><img class="brand-logo" src="./svg/logo-grey.svg" alt="ZAHA Logo"><span class="brand-title">Nozha</span></div>
+      <div class="sidebar-brand"><img class="brand-logo" src="./assets/logos/logo2.svg" alt="ZAHA Logo"></div>
       <p class="side-comment" data-i18n="quick_menu">القائمة السريعة</p>
-      <ul class="side-list"><li class="side-item "><a href="./index.html"><i class="fas fa-gauge-high"></i><span data-i18n="menu_dashboard">الرئيسية</span></a></li>
+      <ul class="side-list"><li class="side-item selected"><a href="./index.html"><i class="fas fa-gauge-high"></i><span data-i18n="menu_dashboard">الرئيسية</span></a></li>
 <li class="side-item "><a href="./calendar.html"><i class="fas fa-calendar-days"></i><span data-i18n="menu_calendar_page">التقويم</span></a></li>
 <li class="side-item "><a href="./datetime.html"><i class="fas fa-clock"></i><span data-i18n="menu_datetime_page">التاريخ والوقت</span></a></li>
 <li class="side-item "><a href="./notifications.html"><i class="fas fa-bell"></i><span data-i18n="menu_notify_page">الإشعارات</span></a></li>
 <li class="side-item "><a href="./card.html"><i class="fas fa-id-card"></i><span data-i18n="menu_cards">البطاقات</span></a></li>
 <li class="side-item "><a href="./Chart.html"><i class="fas fa-chart-line"></i><span data-i18n="menu_analytics">التحليلات</span></a></li>
-<li class="side-item selected"><a href="./Input.html"><i class="fas fa-pen-ruler"></i><span data-i18n="menu_forms">النماذج</span></a></li>
+<li class="side-item "><a href="./Input.html"><i class="fas fa-pen-ruler"></i><span data-i18n="menu_forms">النماذج</span></a></li>
 <li class="side-item "><a href="./sidebar.html"><i class="fas fa-bars"></i><span data-i18n="menu_sidebar">السايدبار</span></a></li>
 <li class="side-item "><a href="./toast.htm"><i class="fas fa-message"></i><span data-i18n="menu_toast">Toast</span></a></li>
 <li class="side-item "><a href="./pagination.html"><i class="fas fa-list-ol"></i><span data-i18n="menu_pagination">Pagination</span></a></li>
@@ -64,7 +64,9 @@
           </ul>
         </nav>
       </header>
-      <main class="content-main"><div class="card p-4"><h1 class="h4 mb-3">Feature: Forms</h1><div class="row g-3"><div class="col-md-6"><input class="form-control" placeholder="الاسم"></div><div class="col-md-6"><input class="form-control" placeholder="البريد"></div><div class="col-12"><textarea class="form-control" rows="3" placeholder="ملاحظات"></textarea></div><div class="col-12"><button class="btn btn-theme">حفظ</button></div></div></div></main>
+      <main class="content-main"><section class="mb-4"><div class="card p-4"><h1 class="h4 mb-2">Welcome to Projects Template</h1><p class="text-muted mb-0">Arabic-first template with RTL/LTR, dark mode, and i18n.</p></div></section>
+<section class="row g-3 mb-4"><div class="col-md-6 col-xl-3"><div class="kpi-card stat-card-blue"><div class="kpi-head"><p class="kpi-label">المشاريع النشطة</p><span class="kpi-icon"><i class="fas fa-layer-group"></i></span></div><h3 class="kpi-value">28</h3><p class="kpi-delta up">+12% عن الشهر الماضي</p></div></div><div class="col-md-6 col-xl-3"><div class="kpi-card stat-card-green"><div class="kpi-head"><p class="kpi-label">المهام المفتوحة</p><span class="kpi-icon"><i class="fas fa-list-check"></i></span></div><h3 class="kpi-value">134</h3><p class="kpi-delta down">-4% خلال 7 أيام</p></div></div><div class="col-md-6 col-xl-3"><div class="kpi-card stat-card-purple"><div class="kpi-head"><p class="kpi-label">أعضاء الفريق</p><span class="kpi-icon"><i class="fas fa-users"></i></span></div><h3 class="kpi-value">16</h3><p class="kpi-delta up">+2 أعضاء جدد</p></div></div><div class="col-md-6 col-xl-3"><div class="kpi-card stat-card-gold"><div class="kpi-head"><p class="kpi-label">نسبة الإنجاز</p><span class="kpi-icon"><i class="fas fa-bullseye"></i></span></div><h3 class="kpi-value">72%</h3><p class="kpi-delta">الهدف القادم: 80%</p></div></div></section>
+<section class="row g-3"><div class="col-lg-8"><div class="card p-3"><h2 class="h4 mb-3">التقويم</h2><div id="calendar"></div><div id="calendarFallback" class="alert alert-warning mt-3 d-none">تعذر تحميل التقويم.</div></div></div><div class="col-lg-4"><div class="card p-3 mb-3"><h2 class="h4">التاريخ والوقت</h2><label for="meetingDate" class="form-label">موعد الاجتماع</label><input id="meetingDate" class="form-control"><small id="currentTime" class="text-muted d-block mt-2"></small><div id="dateFallback" class="alert alert-warning mt-2 d-none">تعذر تحميل أداة التاريخ.</div></div><div class="card p-3"><h2 class="h4">الإشعارات</h2><div class="d-grid gap-2"><button id="successToast" class="btn btn-theme">تنبيه نجاح</button><button id="warningToast" class="btn btn-outline-warning">تنبيه تحذير</button><button id="infoAlert" class="btn btn-outline-info">تنبيه معلومات</button></div></div></div></section></main>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

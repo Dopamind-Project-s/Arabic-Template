@@ -63,6 +63,11 @@
     if (el.bootstrapCss) el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
   };
 
+  const syncSidebarForViewport = () => {
+    if (!el.appSidebar) return;
+    if (window.innerWidth > 991) el.appSidebar.classList.remove('open');
+  };
+
   const syncThemeButtons = (theme) => {
     const label = theme === 'dark' ? (state.dictionary.theme_light || '☀️ Light') : (state.dictionary.theme_dark || '🌙 Dark');
     if (el.themeToggle) el.themeToggle.textContent = label;
@@ -169,6 +174,7 @@
     if (el.themeToggle) el.themeToggle.addEventListener('click', toggleTheme);
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
+    window.addEventListener('resize', syncSidebarForViewport);
 
     if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
     if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
@@ -182,6 +188,7 @@
     initClock();
     bindEvents();
     await loadLocale(state.locale);
+    syncSidebarForViewport();
   };
 
   init();
