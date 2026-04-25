@@ -30,6 +30,7 @@
   };
 
   const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const canFetchLocaleFiles = ['http:', 'https:'].includes(window.location.protocol);
   const state = {
     locale: localStorage.getItem('app_locale') || 'ar',
     theme: localStorage.getItem('app_theme') || preferredTheme,
@@ -54,10 +55,19 @@
 
   let calendar;
 
+  const isMobileViewport = () => window.innerWidth <= 991;
+
+  const setSidebarOpen = (open) => {
+    if (!el.appSidebar) return;
+    el.appSidebar.classList.toggle('open', open);
+    document.body.classList.toggle('mobile-sidebar-open', open && isMobileViewport());
+  };
+
   const setDirection = (locale) => {
     const isArabic = locale === 'ar';
     document.documentElement.lang = locale;
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    document.body.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
     document.body.classList.remove('dir-rtl', 'dir-ltr');
     document.body.classList.add(isArabic ? 'dir-rtl' : 'dir-ltr');
     if (el.bootstrapCss) el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
@@ -65,7 +75,12 @@
 
   const syncSidebarForViewport = () => {
     if (!el.appSidebar) return;
-    if (window.innerWidth > 991) el.appSidebar.classList.remove('open');
+    if (!isMobileViewport()) {
+      setSidebarOpen(false);
+    } else {
+      document.body.classList.remove('sidebar-collapsed');
+      document.body.classList.toggle('mobile-sidebar-open', el.appSidebar.classList.contains('open'));
+    }
   };
 
   const syncThemeButtons = (theme) => {
@@ -99,11 +114,13 @@
 
   const loadLocale = async (locale) => {
     let dict = fallbackDictionaries[locale] || fallbackDictionaries.ar;
-    try {
-      const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
-      if (response.ok) dict = await response.json();
-    } catch (error) {
-      console.warn('Locale fetch fallback:', error);
+    if (canFetchLocaleFiles) {
+      try {
+        const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
+        if (response.ok) dict = await response.json();
+      } catch (error) {
+        console.warn('Locale fetch fallback:', error);
+      }
     }
 
     applyTranslations(dict);
@@ -164,8 +181,53 @@
 
   const toggleSidebar = () => {
     if (!el.appSidebar) return;
-    if (window.innerWidth <= 991) el.appSidebar.classList.toggle('open');
+    if (isMobileViewport()) setSidebarOpen(!el.appSidebar.classList.contains('open'));
     else document.body.classList.toggle('sidebar-collapsed');
+  };
+
+  const bindSidebarCloseBehavior = () => {
+    if (!el.appSidebar) return;
+
+    document.addEventListener('click', (event) => {
+      if (!isMobileViewport() || !el.appSidebar.classList.contains('open')) return;
+      if (el.appSidebar.contains(event.target) || el.sidebarToggle?.contains(event.target)) return;
+      setSidebarOpen(false);
+    });
+
+    el.appSidebar.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (isMobileViewport()) setSidebarOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isMobileViewport() && el.appSidebar.classList.contains('open')) setSidebarOpen(false);
+    });
+  };
+
+  const blockRedundantFileNavigation = () => {
+    if (window.location.protocol !== 'file:') return;
+
+    document.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+        let targetUrl;
+        try {
+          targetUrl = new URL(href, window.location.href);
+        } catch (_) {
+          return;
+        }
+
+        const isSamePage =
+          targetUrl.origin === window.location.origin &&
+          targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search;
+
+        if (isSamePage) event.preventDefault();
+      });
+    });
   };
 
   const bindEvents = () => {
@@ -175,6 +237,8 @@
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
     window.addEventListener('resize', syncSidebarForViewport);
+    bindSidebarCloseBehavior();
+    blockRedundantFileNavigation();
 
     if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
     if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
@@ -182,6 +246,7 @@
   };
 
   const init = async () => {
+    setDirection(state.locale);
     setTheme(state.theme);
     initCalendar();
     initDatePicker();
