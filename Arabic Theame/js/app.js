@@ -30,6 +30,7 @@
   };
 
   const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const canFetchLocaleFiles = ['http:', 'https:'].includes(window.location.protocol);
   const state = {
     locale: localStorage.getItem('app_locale') || 'ar',
     theme: localStorage.getItem('app_theme') || preferredTheme,
@@ -113,11 +114,13 @@
 
   const loadLocale = async (locale) => {
     let dict = fallbackDictionaries[locale] || fallbackDictionaries.ar;
-    try {
-      const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
-      if (response.ok) dict = await response.json();
-    } catch (error) {
-      console.warn('Locale fetch fallback:', error);
+    if (canFetchLocaleFiles) {
+      try {
+        const response = await fetch(`./locales/${locale}/common.json`, { cache: 'no-store' });
+        if (response.ok) dict = await response.json();
+      } catch (error) {
+        console.warn('Locale fetch fallback:', error);
+      }
     }
 
     applyTranslations(dict);
