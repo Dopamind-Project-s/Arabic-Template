@@ -65,7 +65,11 @@
 
   const syncSidebarForViewport = () => {
     if (!el.appSidebar) return;
-    if (window.innerWidth > 991) el.appSidebar.classList.remove('open');
+    if (window.innerWidth > 991) {
+      el.appSidebar.classList.remove('open');
+    } else {
+      document.body.classList.remove('sidebar-collapsed');
+    }
   };
 
   const syncThemeButtons = (theme) => {
@@ -168,6 +172,22 @@
     else document.body.classList.toggle('sidebar-collapsed');
   };
 
+  const bindSidebarCloseBehavior = () => {
+    if (!el.appSidebar) return;
+
+    document.addEventListener('click', (event) => {
+      if (window.innerWidth > 991 || !el.appSidebar.classList.contains('open')) return;
+      if (el.appSidebar.contains(event.target) || el.sidebarToggle?.contains(event.target)) return;
+      el.appSidebar.classList.remove('open');
+    });
+
+    el.appSidebar.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 991) el.appSidebar.classList.remove('open');
+      });
+    });
+  };
+
   const bindEvents = () => {
     if (el.localeToggle) el.localeToggle.addEventListener('click', toggleLocale);
     if (el.mobileLocaleToggle) el.mobileLocaleToggle.addEventListener('click', toggleLocale);
@@ -175,6 +195,7 @@
     if (el.mobileThemeToggle) el.mobileThemeToggle.addEventListener('click', toggleTheme);
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
     window.addEventListener('resize', syncSidebarForViewport);
+    bindSidebarCloseBehavior();
 
     if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
     if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
@@ -182,6 +203,7 @@
   };
 
   const init = async () => {
+    setDirection(state.locale);
     setTheme(state.theme);
     initCalendar();
     initDatePicker();
