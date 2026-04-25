@@ -6,7 +6,9 @@
   align-items: stretch;
 }
 
+html[dir="ltr"] .layout-shell,
 body.dir-ltr .layout-shell { flex-direction: row; }
+html[dir="rtl"] .layout-shell,
 body.dir-rtl .layout-shell { flex-direction: row-reverse; }
 
 .sidebar-original {
@@ -191,12 +193,14 @@ body.sidebar-collapsed .sidebar-brand { justify-content: center; }
     box-shadow: 0 14px 35px rgba(24, 45, 72, .26);
   }
 
+  html[dir="rtl"] .sidebar-original,
   body.dir-rtl .sidebar-original {
     left: auto;
     right: 0;
     transform: translateX(100%);
   }
 
+  html[dir="ltr"] .sidebar-original,
   body.dir-ltr .sidebar-original { transform: translateX(-100%); }
 
   .sidebar-original.open { transform: translateX(0)!important; }

@@ -66,6 +66,7 @@
     const isArabic = locale === 'ar';
     document.documentElement.lang = locale;
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    document.body.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
     document.body.classList.remove('dir-rtl', 'dir-ltr');
     document.body.classList.add(isArabic ? 'dir-rtl' : 'dir-ltr');
     if (el.bootstrapCss) el.bootstrapCss.setAttribute('href', isArabic ? bootstrapHref.rtl : bootstrapHref.ltr);
