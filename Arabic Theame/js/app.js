@@ -54,6 +54,14 @@
 
   let calendar;
 
+  const isMobileViewport = () => window.innerWidth <= 991;
+
+  const setSidebarOpen = (open) => {
+    if (!el.appSidebar) return;
+    el.appSidebar.classList.toggle('open', open);
+    document.body.classList.toggle('mobile-sidebar-open', open && isMobileViewport());
+  };
+
   const setDirection = (locale) => {
     const isArabic = locale === 'ar';
     document.documentElement.lang = locale;
@@ -65,10 +73,11 @@
 
   const syncSidebarForViewport = () => {
     if (!el.appSidebar) return;
-    if (window.innerWidth > 991) {
-      el.appSidebar.classList.remove('open');
+    if (!isMobileViewport()) {
+      setSidebarOpen(false);
     } else {
       document.body.classList.remove('sidebar-collapsed');
+      document.body.classList.toggle('mobile-sidebar-open', el.appSidebar.classList.contains('open'));
     }
   };
 
@@ -168,7 +177,7 @@
 
   const toggleSidebar = () => {
     if (!el.appSidebar) return;
-    if (window.innerWidth <= 991) el.appSidebar.classList.toggle('open');
+    if (isMobileViewport()) setSidebarOpen(!el.appSidebar.classList.contains('open'));
     else document.body.classList.toggle('sidebar-collapsed');
   };
 
@@ -176,15 +185,19 @@
     if (!el.appSidebar) return;
 
     document.addEventListener('click', (event) => {
-      if (window.innerWidth > 991 || !el.appSidebar.classList.contains('open')) return;
+      if (!isMobileViewport() || !el.appSidebar.classList.contains('open')) return;
       if (el.appSidebar.contains(event.target) || el.sidebarToggle?.contains(event.target)) return;
-      el.appSidebar.classList.remove('open');
+      setSidebarOpen(false);
     });
 
     el.appSidebar.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 991) el.appSidebar.classList.remove('open');
+        if (isMobileViewport()) setSidebarOpen(false);
       });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isMobileViewport() && el.appSidebar.classList.contains('open')) setSidebarOpen(false);
     });
   };
 
