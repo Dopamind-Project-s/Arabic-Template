@@ -205,6 +205,31 @@
     });
   };
 
+  const blockRedundantFileNavigation = () => {
+    if (window.location.protocol !== 'file:') return;
+
+    document.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+
+        let targetUrl;
+        try {
+          targetUrl = new URL(href, window.location.href);
+        } catch (_) {
+          return;
+        }
+
+        const isSamePage =
+          targetUrl.origin === window.location.origin &&
+          targetUrl.pathname === window.location.pathname &&
+          targetUrl.search === window.location.search;
+
+        if (isSamePage) event.preventDefault();
+      });
+    });
+  };
+
   const bindEvents = () => {
     if (el.localeToggle) el.localeToggle.addEventListener('click', toggleLocale);
     if (el.mobileLocaleToggle) el.mobileLocaleToggle.addEventListener('click', toggleLocale);
@@ -213,6 +238,7 @@
     if (el.sidebarToggle) el.sidebarToggle.addEventListener('click', toggleSidebar);
     window.addEventListener('resize', syncSidebarForViewport);
     bindSidebarCloseBehavior();
+    blockRedundantFileNavigation();
 
     if (el.successToast) el.successToast.addEventListener('click', () => toastr.success(state.dictionary.notify_saved, state.dictionary.notify_title));
     if (el.warningToast) el.warningToast.addEventListener('click', () => toastr.warning(state.dictionary.notify_warning_msg, state.dictionary.notify_title));
