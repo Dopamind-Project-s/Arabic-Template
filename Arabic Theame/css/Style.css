@@ -1,15 +1,20 @@
 .layout-shell {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
   position: relative;
   overflow-x: clip;
   align-items: stretch;
 }
 
-html[dir="ltr"] .layout-shell,
-body.dir-ltr .layout-shell { flex-direction: row; }
-html[dir="rtl"] .layout-shell,
-body.dir-rtl .layout-shell { flex-direction: row-reverse; }
+html[dir="ltr"] .sidebar-original,
+body.dir-ltr .sidebar-original { order: 1; }
+html[dir="ltr"] .content-shell,
+body.dir-ltr .content-shell { order: 2; }
+html[dir="rtl"] .sidebar-original,
+body.dir-rtl .sidebar-original { order: 2; }
+html[dir="rtl"] .content-shell,
+body.dir-rtl .content-shell { order: 1; }
 
 .sidebar-original {
   width: 230px;
